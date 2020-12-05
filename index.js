@@ -1,11 +1,29 @@
+#!/usr/bin/env node
 const fs = require("fs");
 const ejs = require("ejs");
 const path = require("path");
 const pkgDir = require("pkg-dir");
 const minimist = require("minimist");
+const logger = require("node-color-log");
 const childProcess = require("child_process");
 
+const greenLog = text => {
+	logger.fontColorLog("green", text);
+};
+const redLog = text => {
+	logger.fontColorLog("red", text);
+};
+
 const args = process.argv.slice(2);
+if (args.length <= 0) {
+	console.log("Thieu arguments!");
+	console.log("Ban co the dung: ");
+	greenLog("1. kb2abot-cli new");
+	console.log("De tai kb2abot ve may theo duong dan hien tai");
+	greenLog("2. k2babot-cli create-plugin <ten plugin> [--with-util]");
+	console.log("De tao 1 plugin (co the kem util)");
+	process.exit();
+}
 const argv = minimist(args);
 const method = args[0].trim();
 
@@ -24,7 +42,7 @@ const createPlugin = async () => {
 		);
 		const newPlg = path.join(global.prjDir, "main/plugins", name + ".js");
 		fs.writeFileSync(newPlg, content);
-		console.log(`Da tao 1 file plugin ten ${name}.js tai duong dan:`);
+		greenLog(`Da tao 1 file plugin ten ${name}.js tai duong dan:`);
 		console.log(newPlg);
 		if (argv["with-util"]) {
 			const content = ejs.render(
@@ -35,7 +53,7 @@ const createPlugin = async () => {
 			);
 			const newUtil = path.join(global.prjDir, "main/utils", name + ".js");
 			fs.writeFileSync(newUtil, content);
-			console.log(`Da tao 1 file util ten ${name}.js tai duong dan:`);
+			greenLog(`Da tao 1 file util ten ${name}.js tai duong dan:`);
 			console.log(newUtil);
 		}
 	} else {
@@ -58,12 +76,12 @@ const execShellCommand = cmd => {
 const newKb2abot = async () => {
 	try {
 		console.log("Dang tai phien ban moi nhat cua kb2abot ve may . . .");
-		await execShellCommand("git clone https://github.com/KhoaKoMlem/kb2abot/.");
+		await execShellCommand("git clone https://github.com/kb2abot/kb2abot/.");
 	} catch (e) {
 		console.log(e.message);
-		console.log("Da gap loi trong luc tai kb2abot");
+		redLog("Da gap loi trong luc tai kb2abot");
 	}
-	console.log("Da tai kb2abot ve thanh cong!");
+	greenLog("Da tai kb2abot ve thanh cong!");
 };
 
 (async () => {
