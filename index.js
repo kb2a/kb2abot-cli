@@ -30,11 +30,16 @@ const method = args[0].trim();
 const createPlugin = async () => {
 	const utilDir = path.join(global.prjDir, "main", "utils");
 	const pluginDir = path.join(global.prjDir, "main", "plugins");
+	if (!args[1]) {
+		redLog("Ban chua nhap ten plugin!");
+		greenLog("vd: kb2abot-cli create-plugin test");
+		process.exit();
+	}
 	const name = args[1].trim();
 
 	if (fs.existsSync(pluginDir) && fs.existsSync(utilDir)) {
 		const content = ejs.render(
-			fs.readFileSync(global.prjDir + "/main/templates/plugin.ejs").toString(),
+			fs.readFileSync(__dirname + "/templates/plugin.ejs").toString(),
 			{
 				name,
 				hasUtil: argv["with-util"]
@@ -46,7 +51,7 @@ const createPlugin = async () => {
 		console.log(newPlg);
 		if (argv["with-util"]) {
 			const content = ejs.render(
-				fs.readFileSync(global.prjDir + "/main/templates/util.ejs").toString(),
+				fs.readFileSync(__dirname + "/templates/util.ejs").toString(),
 				{
 					name
 				}
