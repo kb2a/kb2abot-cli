@@ -1,13 +1,16 @@
 <%if (hasUtil) {%>const { /*get somthing*/ } = kb2abot.utils["<%=name%>"];
 
 <%}%>module.exports = {
+	author: "",
+	// Tên tác giả của plugin này
+
 	type: "normal",
-	// gồm 2 type: "normal" và "continuous"
+	// Gồm 2 type: "normal" và "continuous"
 	// normal là gọi lệnh và thực hiện lệnh đó 1 cách bình thường
 	// continuous là gọi lệnh đó xong, lệnh vẫn tiếp tục thực hiện mà không cần prefix!
 
 	friendlyName: "Plugin that do awesome things",
-	// tên thân thiện của plugin (để hiển thị trong danh sách câu lệnh)
+	// Tên thân thiện của plugin (để hiển thị trong danh sách câu lệnh)
 
 	keywords: ["<%=name%>"],
 	// Là các từ khóa để gọi plugin <%=name%> (có thể có nhiều cái)
@@ -20,6 +23,13 @@
 
 	fn: async function(api, message) {
 		// Code của bạn ở đây . . .
-	}
-	// function chính của plugin
+	},
+	// Function chính của plugin
+
+	dependencies: [],
+	// Các package cần thiết cho plugin
+	// khi bị lỗi Cannot find module thì thêm tên package đó vào đây
+	// Ví dụ: Cannot find module "canvas" thì dòng trên sẽ thành:
+	// dependencies: ["canvas"],
+	// Kb2abot sẽ tự động tải package canvas phiên bản mới nhất về
 };

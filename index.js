@@ -6,7 +6,6 @@ const pkgDir = require("pkg-dir");
 const minimist = require("minimist");
 const logger = require("node-color-log");
 const childProcess = require("child_process");
-
 const greenLog = text => {
 	logger.fontColorLog("green", text);
 };
@@ -16,12 +15,18 @@ const redLog = text => {
 
 const args = process.argv.slice(2);
 if (args.length <= 0) {
+	const data = [
+		["new", "Tai kb2abot ve may theo duong dan hien tai (folder phai rong)"],
+		["clone", "Clone kb2abot ve may theo duong dan ~/kb2abot"],
+		["create-plugin <ten plugin> [--with-util]", "Tao 1 plugin (co the kem util)"]
+	];
 	console.log("Thieu arguments!");
 	console.log("Ban co the dung: ");
-	greenLog("1. kb2abot-cli new");
-	console.log("De tai kb2abot ve may theo duong dan hien tai");
-	greenLog("2. k2babot-cli create-plugin <ten plugin> [--with-util]");
-	console.log("De tao 1 plugin (co the kem util)");
+	for (let i = 0; i < data.length; i++) {
+		greenLog(`${i + 1}. kb2abot-cli ${data[i][0]}`);
+		console.log(data[i][1]);
+		console.log("---------");
+	}
 	process.exit();
 }
 const argv = minimist(args);
@@ -32,7 +37,7 @@ const createPlugin = async () => {
 	const pluginDir = path.join(global.prjDir, "main", "plugins");
 	if (!args[1]) {
 		redLog("Ban chua nhap ten plugin!");
-		greenLog("vd: kb2abot-cli create-plugin test");
+		greenLog("kb2abot-cli create-plugin <ten plugin>");
 		process.exit();
 	}
 	const name = args[1].trim();
@@ -78,10 +83,12 @@ const execShellCommand = cmd => {
 	});
 };
 
-const newKb2abot = async () => {
+const newKb2abot = async (path = "") => {
 	try {
 		console.log("Dang tai phien ban moi nhat cua kb2abot ve may . . .");
-		await execShellCommand("git clone https://github.com/kb2abot/kb2abot/.");
+		await execShellCommand(
+			"git clone https://github.com/kb2abot/kb2abot/" + path
+		);
 	} catch (e) {
 		console.log(e.message);
 		redLog("Da gap loi trong luc tai kb2abot");
@@ -96,6 +103,9 @@ const newKb2abot = async () => {
 			await createPlugin();
 			break;
 		case "new":
+			await newKb2abot(".");
+			break;
+		case "clone":
 			await newKb2abot();
 			break;
 	}
