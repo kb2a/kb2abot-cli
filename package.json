@@ -1,6 +1,6 @@
 {
   "name": "kb2abot-cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A command line tool of kb2abot",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,6 @@
   "author": "Khoa Ko Mlem",
   "license": "ISC",
   "dependencies": {
-    "adm-zip": "^0.5.1",
     "ejs": "^3.1.5",
     "minimist": "^1.2.5",
     "node-color-log": "^5.2.0",
@@ -24,5 +23,8 @@
     "kb2abot-cli",
     "kb2a"
   ],
-  "bin": "./index.js"
+  "bin": "./index.js",
+  "devDependencies": {
+    "eslint": "^7.16.0"
+  }
 }

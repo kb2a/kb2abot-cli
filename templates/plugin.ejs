@@ -1,35 +1,38 @@
 <%if (hasUtil) {%>const { /*get somthing*/ } = kb2abot.utils["<%=name%>"];
 
 <%}%>module.exports = {
-	author: "",
-	// Tên tác giả của plugin này
-
-	type: "normal",
-	// Gồm 2 type: "normal" và "continuous"
-	// normal là gọi lệnh và thực hiện lệnh đó 1 cách bình thường
-	// continuous là gọi lệnh đó xong, lệnh vẫn tiếp tục thực hiện mà không cần prefix!
+	authorDetails: {	// Thông tin tác giả
+		name: "xxx",				// Tên tác giả của plugin này
+		contact: "fb.com/xxx"			// Liên hệ (có thể là link fb, gmail, bla bla)
+	},
 
 	friendlyName: "Plugin that do awesome things",
-	// Tên thân thiện của plugin (để hiển thị trong danh sách câu lệnh)
+	// Tên thân thiện của plugin (hiển thị trong danh sách câu lệnh)
 
 	keywords: ["<%=name%>"],
-	// Là các từ khóa để gọi plugin <%=name%> (có thể có nhiều cái)
+	// Là các từ khóa để gọi plugin <%=name%> (có thể có nhiều keyword)
 
 	description: "This plugin is awesome!",
-	// Là nội dung của plugin (dùng để hiển thị trong hướng dẫn chi tiết)
+	// Là nội dung của plugin (hiển thị trong <prefix>help <tên lệnh>)
 
-	extendedDescription: "/<%=name%> ",
-	// Là hướng dẫn sử dụng của plugin (dùng để hiển thị trong hướng dẫn chi tiết)
+	extendedDescription: " ",
+	// Là hướng dẫn sử dụng của plugin (hiển thị trong <prefix>help <tên lệnh>)
 
-	fn: async function(api, message) {
-		// Code của bạn ở đây . . .
+	hideFromHelp: false,
+	// Ẩn plugin khỏi help
+	// true là ẩn, còn false là hiện
+
+	onLoad: async function() {
+		// Được gọi khi plugin load xong
 	},
-	// Function chính của plugin
 
-	dependencies: [],
-	// Các package cần thiết cho plugin
-	// khi bị lỗi Cannot find module thì thêm tên package đó vào đây
-	// Ví dụ: Cannot find module "canvas" thì dòng trên sẽ thành:
-	// dependencies: ["canvas"],
-	// Kb2abot sẽ tự động tải package canvas phiên bản mới nhất về
+	onMessage: async function(api, message) {
+		// Được gọi mỗi khi có message nhắn tới (kể cả khi dùng lệnh)
+		// Lưu ý: onMessage không được gọi khi member xài lệnh của mình (xem onCall)
+	},
+
+	onCall: async function(api, message) {
+		// Được gọi khi có member xài lệnh của mình
+		// Note: onCall và onMessage không bao giờ chạy cùng 1 lúc
+	}
 };
