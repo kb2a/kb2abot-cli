@@ -1,38 +1,56 @@
-<%if (hasUtil) {%>const { /*get somthing*/ } = kb2abot.utils["<%=name%>"];
+<%
+Object.assign(globalThis, {
+	util: false,
+	clean: false
+})
+if (util) {%>const { /*get somthing*/ } = kb2abot.utils["<%=name%>"];
 
 <%}%>module.exports = {
-	authorDetails: {	// Thông tin tác giả
-		name: "xxx",				// Tên tác giả của plugin này
-		contact: "fb.com/xxx"			// Liên hệ (có thể là link fb, gmail, bla bla)
+	authorDetails: {
+		name: "xxx",<%if (!clean){%>
+		// Tên tác giả của plugin này<%}%>
+		contact: "fb.com/xxx"<%if (!clean){%>
+		// Liên hệ (có thể là link fb, gmail, ...)<%}%>
 	},
 
-	friendlyName: "Plugin that do awesome things",
-	// Tên thân thiện của plugin (hiển thị trong danh sách câu lệnh)
+	friendlyName: "Plugin that do awesome things",<%if (!clean){%>
+	// Tên thân thiện của plugin (hiển thị trong danh sách câu lệnh)<%}%>
 
-	keywords: ["<%=name%>"],
-	// Là các từ khóa để gọi plugin <%=name%> (có thể có nhiều keyword)
+	keywords: ["<%=name%>"],<%if (!clean){%>
+	// Các từ khóa để gọi plugin <%=name%> (có thể có nhiều keyword)
+	// ví dụ keyword "test" thì khi có người nhắn <prefix>test là plugin được gọi<%}%>
 
-	description: "This plugin is awesome!",
-	// Là nội dung của plugin (hiển thị trong <prefix>help <tên lệnh>)
+	description: "This plugin is awesome!",<%if (!clean){%>
+	// Nội dung của plugin (hiển thị trong hướng dẫn chi tiết)<%}%>
 
-	extendedDescription: " ",
-	// Là hướng dẫn sử dụng của plugin (hiển thị trong <prefix>help <tên lệnh>)
+	extendedDescription: "",<%if (!clean){%>
+	// Hướng dẫn sử dụng của plugin (hiển thị trong hướng dẫn chi tiết)
+	// Phần này được nối đuôi sau từ "<prefix><%=name%> " nên chú ý nhé<%}%>
 
-	hideFromHelp: false,
+	hideFromHelp: false,<%if (!clean){%>
 	// Ẩn plugin khỏi help
-	// true là ẩn, còn false là hiện
+	// true là ẩn, còn false là hiện<%}%>
 
-	onLoad: async function() {
-		// Được gọi khi plugin load xong
+	disable: false,<%if (!clean){%>
+	// Bật/Tắt plugin
+	// Nếu tắt thì plugin sẽ không được load và xài được (nhưng vẫn check syntax)
+	// true là tắt, false là bật<%}%>
+
+	onLoad: async function() {<%if (!clean){%>
+		// Được gọi ngay sau khi load xong plugin
+		// Chủ yếu dùng để log thôi không quan trọng
+		// (Hoặc cũng có thể chuẩn bị các async function bằng await)<%}%>
 	},
 
-	onMessage: async function(api, message) {
+	onMessage: async function(api, message) {<%if (!clean){%>
 		// Được gọi mỗi khi có message nhắn tới (kể cả khi dùng lệnh)
-		// Lưu ý: onMessage không được gọi khi member xài lệnh của mình (xem onCall)
+		// Chủ yếu dùng để làm mấy plugin kiểu gián điệp hoặc game
+		// Xử lí mọi tin nhắn mà không cần prefix<%}%>
 	},
 
-	onCall: async function(api, message) {
+	onCall: async function(api, message) {<%if (!clean){%>
 		// Được gọi khi có member xài lệnh của mình
-		// Note: onCall và onMessage không bao giờ chạy cùng 1 lúc
+		// Là cốt lõi của plugin không có phần này thì có nghĩa sẽ không có chuyện
+		// gì xảy ra khi gọi plugin (để hideFromHelp true nữa là plugin như batman)<%}%>
 	}
 };
