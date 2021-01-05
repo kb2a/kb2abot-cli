@@ -6,7 +6,7 @@ const template = require('../templates');
 module.exports = {
 	keywords: ['rebase', 'rb'],
 	params: [],
-	description: 'Comment code plugin hiện tại init lại cấu trục plugin (CHỈ DÀNH CHO NHÀ PHÁT TRIỂN)',
+	description: 'Comment code plugin hien tai roi init lai cau truc plugin (FOR DEV ONLY)',
 	fn: async argv => {
 		const pluginDir = path.join(global.kb2abotDir, 'main', 'plugins');
 		if (!argv._[1])
