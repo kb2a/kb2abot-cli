@@ -7,7 +7,7 @@ module.exports = {
 	fn: async () => {
 		try {
 			console.log('Dang tai phien ban moi nhat cua kb2abot ve may . . .');
-			await execShellCommand('git clone https://github.com/kb2abot/kb2abot/');
+			await execShellCommand('git clone https://github.com/kb2ateam/kb2abot');
 		} catch (e) {
 			redLog('Da gap loi trong luc tai kb2abot');
 			throw e.message;
