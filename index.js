@@ -28,6 +28,7 @@ const argv = minimist(process.argv.slice(2));
 		}
 		catch (message) {
 			redLog(`Error: ${message}`);
+			console.log(message);
 			process.exit();
 		}
 	}

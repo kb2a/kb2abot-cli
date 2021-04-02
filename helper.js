@@ -21,8 +21,16 @@ const redLog = text => {
 	logger.fontColorLog('red', text);
 };
 
+const subname = text => {
+	return text
+		.split('.')
+		.slice(0, -1)
+		.join('.');
+};
+
 module.exports = {
 	execShellCommand,
 	greenLog,
-	redLog
+	redLog,
+	subname
 };

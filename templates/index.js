@@ -1,5 +1,5 @@
 const fs = require('fs');
-const templates = ['plugin', 'util'];
+const templates = ['command', 'manifest'];
 
 for (const template of templates) {
 	module.exports[template] = String(
