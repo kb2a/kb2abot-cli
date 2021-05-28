@@ -1,4 +1,3 @@
-
 # kb2abot-cli
 ## Cài đặt
 ```shellscript
@@ -10,14 +9,24 @@ Nhớ cài kb2abot-cli global nhé các bạn!
 ```shellscript
 kb2abot-cli clone
 ```
-Lệnh này sẽ tự động tải kb2abot phiên bản mới nhất trên github về ~/kb2abot (https://github.com/kb2abot/kb2abot)
-### 2. Lệnh tạo plugin và util mới
+Lệnh này sẽ tự động tải kb2abot phiên bản mới nhất trên github về ~/kb2abot (https://github.com/kb2ateam/kb2abot)
+### 2. Lệnh tạo plugin mới
 ```shellscript
-kb2abot-cli create-plugin <tên plugin> [--with-util]
+kb2abot-cli create-plugin <tên plugin> [--clean]
 ```
-<tên plugin> sẽ làm tên file của plugin và util luôn (nếu --with-util được sử dụng)
-
-**Còn nhiều lệnh nữa, các bạn có thể xem danh sách lệnh bằng cách gõ:**
+<tên plugin>: Tên file của plugin<br>
+--clean: Xóa hết comment hướng dẫn trong file đó
+### 3. Lệnh tạo command mới
+```shellscript
+kb2abot-cli create-command <tên command> [--clean]
+```
+### 4. Lệnh đổi mới cấu trúc command
+```shellscript
+kb2abot-cli rebase <đường dẫn tới file command> [--clean]
+```
+Lệnh này sẽ comment hết code của file sau đó ghép cấu trúc mới vào (dành cho nhà phát triển)
+<br><br>
+*Các bạn có thể xem danh sách lệnh bằng cách gõ:*
 ```shellscript
 kb2abot-cli help
 ```
