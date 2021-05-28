@@ -8,7 +8,7 @@ module.exports = {
 	keywords: ['create-command'],
 	params: [],
 	description: 'Tao 1 file command',
-	fn: async (argv) => {
+	fn: async argv => {
 		if (!argv._[1])
 			throw 'Ban chua nhap ten cau lenh!\n kb2abot-cli create-command <ten lenh>';
 		const name = argv._[1].trim();

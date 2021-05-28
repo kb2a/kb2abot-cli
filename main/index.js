@@ -4,5 +4,5 @@ module.exports = {
 	createPlugin: require('./createPlugin'),
 	help: require('./help'),
 	rebase: require('./rebase'),
-	version: require('./version'),
+	version: require('./version')
 };
