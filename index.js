@@ -1,9 +1,24 @@
 #!/usr/bin/env node
-global.main = require('./main');
+import glob from "glob"
+import url from "url"
 
-const pkgDir = require('pkg-dir');
-const minimist = require('minimist');
-const {redLog} = require('./helper.js');
+for (const file of glob.sync(url.fileURLToPath(new URL(url.resolve(import.meta.url, "commands/*.js")))))
+	await import(new URL(url.resolve(import.meta.url, file)))
+import cli from "./global.js"
+
+cli.demandCommand(1).parse()
+
+// const amo = yargs(hideBin(process.argv))
+// 	.command("curl <url>", "fetch the contents of the URL", () => {}, (argv) => {
+// 		console.info(argv)
+// 	})
+
+/*
+global.main = require("./main");
+
+const pkgDir = require("pkg-dir");
+const minimist = require("minimist");
+const {redLog} = require("./helper.js");
 const argv = minimist(process.argv.slice(2));
 
 (async () => {
@@ -18,7 +33,7 @@ const argv = minimist(process.argv.slice(2));
 				notFound = false;
 			} else {
 				for (const param in argv) {
-					if (param == '_') continue;
+					if (param == "_") continue;
 					if (params.includes(param)) {
 						await fn(argv);
 						notFound = false;
@@ -35,3 +50,11 @@ const argv = minimist(process.argv.slice(2));
 		global.main.help.fn();
 	}
 })();
+
+const subname = text => {
+	return text
+		.split('.')
+		.slice(0, -1)
+		.join('.');
+};
+*/

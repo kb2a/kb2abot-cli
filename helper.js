@@ -1,36 +1,19 @@
-const logger = require('node-color-log');
-const childProcess = require('child_process');
+import fs from "fs"
+import fetch from "node-fetch"
 
-const execShellCommand = (cmd, options) => {
-	return new Promise(resolve => {
-		childProcess.exec(cmd, options, (error, stdout, stderr) => {
-			if (error) {
-				console.warn(error);
-				resolve();
-			}
-			resolve(stdout ? stdout : stderr);
-		});
-	});
-};
-
-const greenLog = text => {
-	logger.fontColorLog('green', text);
-};
-
-const redLog = text => {
-	logger.fontColorLog('red', text);
-};
-
-const subname = text => {
+export function subname(text) {
 	return text
-		.split('.')
+		.split(".")
 		.slice(0, -1)
-		.join('.');
-};
+		.join(".")
+}
 
-module.exports = {
-	execShellCommand,
-	greenLog,
-	redLog,
-	subname
-};
+export async function downloadFile(url, path) {
+	const res = await fetch(url)
+	const fileStream = fs.createWriteStream(path)
+	await new Promise((resolve, reject) => {
+		res.body.pipe(fileStream)
+		res.body.on("error", reject)
+		fileStream.on("finish", resolve)
+	})
+}

@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "name": "kb2abot-cli",
-  "version": "0.1.8",
-  "description": "A command line tool of kb2abot",
+  "version": "0.2.0",
+  "description": "Command line tool of kb2abot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,14 +10,19 @@
   "author": "khoakomlem",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/plugin-syntax-top-level-await": "^7.14.5",
     "ejs": "^3.1.5",
-    "minimist": "^1.2.5",
-    "node-color-log": "^5.2.0",
-    "pkg-dir": "^5.0.0"
+    "extract-zip": "^2.0.1",
+    "glob": "^7.2.0",
+    "node-fetch": "^3.2.0",
+    "pkg-dir": "^5.0.0",
+    "yargs": "^17.3.1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khoakomlem/kb2abot-cli.git"
+    "url": "git+https://github.com/kb2ateam/kb2abot-cli.git"
   },
   "keywords": [
     "kb2abot",
@@ -25,6 +31,6 @@
   ],
   "bin": "./index.js",
   "devDependencies": {
-    "eslint": "^7.16.0"
+    "eslint": "^7.26.0"
   }
 }

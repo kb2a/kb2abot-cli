@@ -1,0 +1,42 @@
+<%
+const className = name.charAt(0).toUpperCase() + name.slice(1)
+%>import fs from "fs"
+import url from "url"
+import glob from "glob"
+import {Plugin} from "kb2abot"
+
+export default class <%=className%> extends Plugin {
+	package = JSON.parse(
+		fs.readFileSync(new URL(url.resolve(import.meta.url, "../package.json")))
+	);
+<% if (!clean) {%>
+	// Handle raw datastore has recently read from local file, return new datastore by you want<%}%>
+	handleDatastore(rawConfig, rawUserdata) {
+		const templateConfig = {
+		}
+		const templateUserdata = {
+		}
+		return {
+			config: {...templateConfig, ...rawConfig},
+			userdata: {...templateUserdata, ...rawUserdata}
+		}
+	}
+<% if (!clean) {%>
+	// Called after this plugin is constructored (you would wrap your "async this.commands.add(command)" in this function in order to load commands in synchronous)<%}%>
+	async load() {
+		const files = glob.sync(url.fileURLToPath(new URL(url.resolve(import.meta.url, "commands/*.js"))))
+		const commands = []
+		for (const file of files) {
+			const Command = (await import(file)).default
+			commands.push(new Command())
+		}
+		await this.commands.add(...commands)
+	}
+<% if (!clean) {%>
+	// Called in every message (include replying message)<%}%>
+	async hook(thread, message, reply, api) {
+
+	}
+}<% if (!clean) {%>
+
+// export {ExternalExport} from "./commands/something.js"<%}%>

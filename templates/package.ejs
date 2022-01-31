@@ -1,0 +1,17 @@
+{
+  "name": "<%=name%>",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "<%=name%> plugin",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --es-module-specifier-resolution=node --no-warnings src",
+    "dev": "node --trace-warnings --es-module-specifier-resolution=node src",
+    "debug": "node --trace-warnings --es-module-specifier-resolution=node --inspect-brk src"
+  },
+  "author": "<%=username%>",
+  "license": "ISC",
+  "dependencies": {
+    "kb2abot": "^1.0.0"
+  }
+}
