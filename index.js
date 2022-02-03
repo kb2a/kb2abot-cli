@@ -2,7 +2,9 @@
 import glob from "glob"
 import url from "url"
 
-for (const file of glob.sync(url.fileURLToPath(new URL(url.resolve(import.meta.url, "commands/*.js")))))
+for (const file of glob.sync(
+	url.fileURLToPath(new URL(url.resolve(import.meta.url, "commands/*.js")))
+))
 	await import(new URL(url.resolve(import.meta.url, file)))
 import cli from "./global.js"
 
